@@ -24,6 +24,10 @@ class KbplacerPluginAction(pcbnew.ActionPlugin):
         if int(version.split(".")[0]) < 6:
             msg = f"KiCad version {version} is not supported"
             raise Exception(msg)
+        if sys.version_info < (3, 10):
+            msg = f"Python {sys.version} is not supported"
+            raise Exception(msg)
+
         self.board = pcbnew.GetBoard()
 
         board_file = self.board.GetFileName()
